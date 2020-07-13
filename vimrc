@@ -1,5 +1,10 @@
+if &shell =~# 'fish$'
+    set shell=sh
+endif
+
 set number
 
+syntax enable
 filetype plugin indent on
 " show existing tab with 4 spaces width
 set tabstop=4

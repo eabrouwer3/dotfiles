@@ -1,0 +1,26 @@
+# Gnome Tweaks
+- aptget: ['numix-icon-theme-circle', 'materia-gtk-theme']
+
+# General Packages
+- aptget: ['vim', 'tmux', 'fortune-mod', 'cowsay', 'lolcat', 'ripgrep', 'bat', 'tree', 'openjdk-8-jre-headless', 'openjdk-8-jdk-headless', 'htop']
+
+- aptget:
+    howdy: ppa:boltgolt/howdy
+- link:
+    /usr/bin/bat: /usr/bin/batcat
+- shell:
+    - command: curl https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein -o /usr/bin/lein
+      description: Installing Leiningen
+      stdout: true
+    - command: chmod +x /usr/bin/lein
+    - command: lein
+      stdin: true
+      stdout: true
+      stderr: true
+
+# Fish
+- aptget:
+    fish: ppa:fish-shell/release-3
+- shell:
+    - command: chsh -s $(which fish)
+      description: Set Fish as Login Shell

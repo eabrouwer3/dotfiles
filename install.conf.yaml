@@ -1,7 +1,25 @@
 - clean: ['~']
+- clean: 
+    ~/.config:
+      recursive: true
+
+- shell:
+    - command: curl -L https://get.oh-my.fish | fish
+      description: Installing Oh My Fish
+      stdin: true
+      stdout: true
+      stderr: true
+- shell:
+    - command: omf install cbjohnson
+    - command: omf theme cbjohnson
+    - command: omf install bass
+    - command: exit
+
 
 - link:
     ~/.tmux.conf: tmux.conf
     ~/.vimrc: vimrc
 
-
+- create:
+    - ~/source
+    - ~/.config/fish
