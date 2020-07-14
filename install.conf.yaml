@@ -4,12 +4,16 @@
       recursive: true
 
 - shell:
-    - command: curl -L https://get.oh-my.fish | fish
+    - command: curl -L https://get.oh-my.fish > install-omf
+      description: Downloading Oh My Fish Installer
+    - command: omf || fish install-omf
       description: Installing Oh My Fish
       stdin: true
       stdout: true
       stderr: true
+    - command: rm install-omf
 - shell:
+    - command: fish
     - command: omf install cbjohnson
     - command: omf theme cbjohnson
     - command: omf install bass
