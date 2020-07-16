@@ -1,8 +1,8 @@
 # General Packages
 - aptget: ['vim', 'tmux', 'fortune-mod', 'cowsay', 'lolcat', 'bat', 'tree', 'openjdk-8-jre-headless', 'openjdk-8-jdk-headless', 'htop']
 - shell:
-    - command: rm -f /usr/.crates2.json
-- aptget: ['ripgrep']
+    - command: apt-get download ripgrep
+    - command: dpkg --force-overwrite -i ripgrep*.deb
 
 - link:
     /usr/bin/bat: /usr/bin/batcat
