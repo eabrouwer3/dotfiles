@@ -10,7 +10,7 @@
     stdout: true
     stderr: true
 - shell:
-    - command: vf install
+    - command: ~/.local/bin/vf install
       description: Installing Virtualfish
       stdout: true
       stderr: true
