@@ -17,11 +17,9 @@
       stderr: true
     - command: rm install-omf
 - shell:
-    - command: fish
-    - command: omf install cbjohnson
-    - command: omf theme cbjohnson
-    - command: omf install bass
-    - command: exit
+    - command: fish -c omf install cbjohnson
+    - command: fish -c omf theme cbjohnson
+    - command: fish -c omf install bass
 
 - link:
     ~/.tmux.conf: tmux.conf
