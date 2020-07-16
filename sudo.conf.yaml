@@ -1,5 +1,5 @@
 # General Packages
-- aptget: ['vim', 'tmux', 'fortune-mod', 'cowsay', 'lolcat', 'bat', 'tree', 'openjdk-8-jre-headless', 'openjdk-8-jdk-headless', 'htop']
+- aptget: ['vim', 'tmux', 'fortune-mod', 'cowsay', 'lolcat', 'bat', 'tree', 'openjdk-8-jre-headless', 'openjdk-8-jdk-headless', 'htop', 'python3']
 - shell:
     - command: apt-get download ripgrep
     - command: dpkg --force-overwrite -i ripgrep*.deb
