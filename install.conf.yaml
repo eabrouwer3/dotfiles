@@ -3,6 +3,10 @@
     ~/.config:
       recursive: true
 
+- create:
+    - ~/source
+    - ~/.config/fish
+
 - shell:
     - command: curl -L https://get.oh-my.fish > install-omf
       description: Downloading Oh My Fish Installer
@@ -19,11 +23,8 @@
     - command: omf install bass
     - command: exit
 
-
 - link:
     ~/.tmux.conf: tmux.conf
     ~/.vimrc: vimrc
+    ~/.config/fish: fish
 
-- create:
-    - ~/source
-    - ~/.config/fish

@@ -1,0 +1,5 @@
+# Gnome Tweaks
+- aptget: ['numix-icon-theme-circle', 'materia-gtk-theme']
+
+- aptget:
+    howdy: ppa:boltgolt/howdy
