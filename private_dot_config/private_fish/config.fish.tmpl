@@ -1,0 +1,23 @@
+# Environment Variables
+set -x BAT_THEME "base16"
+set -x NODE_AUTH_TOKEN {{ (index (lastpassRaw "GitHub Token") 0).note }}
+set -x JENV_ROOT /usr/local/opt/jenv
+
+# Setup $PATH
+fish_add_path $HOME/.cargo/bin
+fish_add_path $HOME/.foundry/bin
+fish_add_path $HOME/.jenv/bin
+fish_add_path /usr/local/opt/gnu-sed/libexec/gnubin
+
+# Update jenv
+status --is-interactive; and source (jenv init -|psub)
+
+# SSH Keys
+ssh-add -q ~/.ssh/id_rsa
+
+# Aliases
+alias curltime="curl -w \"@$HOME/.curl-format.txt\" -o /dev/null -s "
+alias tf='terraform'
+alias uuid='uuidgen | string lower'
+alias k='kubectl'
+alias awslocal="AWS_ACCESS_KEY_ID=test AWS_SECRET_ACCESS_KEY=test AWS_DEFAULT_REGION=us-east-1 aws --endpoint-url=http://localhost:4566"

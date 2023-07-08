@@ -1,0 +1,105 @@
+#!/bin/bash
+
+{{- if eq .chezmoi.os "darwin" -}}
+
+# Install xcode command line tools
+xcode-select --install
+
+# Install Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# AWS CLI Install
+curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+sudo installer -pkg AWSCLIV2.pkg -target /
+rm AWSCLIV2.pkg
+
+# Brewfile Bundle
+brew bundle --no-lock --file=/dev/stdin <<EOF
+tap "aws/tap"
+tap "dbt-labs/dbt"
+tap "hashicorp/tap"
+brew "ack"
+brew "aws/tap/aws-sam-cli"
+brew "bash"
+brew "bash-completion2"
+brew "chezmoi"
+brew "coreutils"
+brew "cowsay"
+brew "docker"
+brew "docker-completion"
+brew "docker-compose"
+brew "findutils"
+brew "fish"
+brew "git"
+brew "grep"
+brew "hashicorp/tap/packer"
+brew "hashicorp/tap/terraform"
+brew "helm"
+brew "htop"
+brew "jq"
+brew "jenv"
+brew "kind"
+brew "kubectl"
+brew "lastpass-cli"
+brew "lolcat"
+brew "moreutils"
+brew "openjdk"
+brew "openjdk@8"
+brew "openjdk@11"
+brew "openjdk@17"
+brew "openssh"
+brew "p7zip"
+brew "pipx"
+brew "python@3.10"
+brew "rust"
+brew "stern"
+brew "telnet"
+brew "tmux"
+brew "tree"
+brew "vim"
+cask "alt-tab"
+cask "bettertouchtool"
+cask "brave-browser"
+cask "discord"
+cask "iterm2"
+cask "jetbrains-toolbox"
+cask "keybase"
+cask "obsidian"
+cask "postman"
+cask "scroll-reverser"
+cask "spotify"
+cask "visual-studio-code"
+cask "vlc"
+cask "zoom"
+EOF
+
+{{ end -}}
+
+# Set Fish as Default Shell
+if ! fgrep -q "/usr/local/bin/fish" /etc/shells; then
+  echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
+fi
+chsh -s "/usr/local/bin/fish"
+
+# Setup jenv
+ln -s /usr/local/opt/jenv/libexec/fish/jenv.fish $HOME/.config/fish/functions/jenv.fish
+ln -s /usr/local/opt/jenv/libexec/fish/export.fish $HOME/.config/fish/functions/export.fish
+
+# Install virtualfish
+pipx install virtualfish
+vf install auto_activation global_requirements
+
+# Install Fisher
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+
+# Install Fisher Plugins
+fisher install jorgebucaran/nvm.fish
+fisher install edc/bass
+fisher install oh-my-fish/theme-cbjohnson
+fisher install mgoodness/plugin-asp
+
+# Install yawsso
+pipx install yawsso
+
+# Install Foundry
+curl -L https://foundry.paradigm.xyz | bash
