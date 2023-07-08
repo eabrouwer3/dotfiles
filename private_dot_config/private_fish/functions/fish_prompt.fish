@@ -36,10 +36,12 @@ function fish_prompt
 
   # Top
   echo -n $cyan$USER$normal at $yellow$__fish_prompt_hostname$normal in $bred(prompt_pwd)$normal
-  if set -q VIRTUAL_ENV
-    echo -n -s " " (set_color -b blue white) "(" (basename "$VIRTUAL_ENV") ")" $normal
-  end
   __fish_git_prompt
+
+  # Custom prompt additions
+  if set -q VIRTUAL_ENV
+    echo -n -s " " (set_color -b blue white) "(" (basename "$VIRTUAL_ENV") ")" (set_color normal) " "
+  end
 
   echo
 
