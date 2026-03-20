@@ -1,0 +1,8 @@
+{
+  "ssoConfigs": {
+    "taxbit": {
+      "startUrl": "https://txbt.awsapps.com/start",
+      "region": "us-east-1"
+    }
+  }
+}

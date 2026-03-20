@@ -1,0 +1,7 @@
+shell-integration = fish
+font-family = Monaspace Radon
+font-size = 13
+
+# Add further Ghostty settings below this line:
+# theme = ...
+# keybind = ...

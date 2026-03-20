@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "name": "Clean Documentation",
+  "description": "Automatically reviews and cleans up documentation and comments in Python and Markdown files, keeping things simple and minimal while moving important AI context to steering files",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "**/*.py",
+      "**/*.md"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A Python or Markdown file was just edited. Review the documentation and comments for cleanup:\n\n1. **Remove obvious comments** - Delete comments that just describe what the code clearly does\n2. **Simplify docstrings** - Keep docstrings minimal, remove verbose descriptions of obvious behavior\n3. **Remove redundant type hints in docs** - Don't repeat type information already in signatures\n4. **Clean up over-explained code** - Remove comments that explain standard patterns\n5. **Identify AI-relevant context** - If there are comments with important context for AI agents, note them for potential steering file addition\n\nGuidelines:\n- Keep comments only when they explain WHY, not WHAT\n- Preserve comments about non-obvious business logic or edge cases\n- Remove tutorial-style comments\n- Keep code self-documenting through clear naming\n\nIf you find documentation to clean:\n- Make the changes directly\n- Be concise in your summary\n\nIf documentation is already minimal, just say \"Documentation looks clean\" without making changes."
+  }
+}
