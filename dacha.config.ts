@@ -12,13 +12,14 @@ import {
   MacDefault,
   GitRepo,
 } from "@eabrouwer3/dacha";
+import type { Params } from "@eabrouwer3/dacha";
 
 class MacBookPro extends Machine {
   static override params = [
     { name: "isTaxbitLaptop", message: "Is this a Taxbit laptop?", type: "confirm" as const, default: false },
   ];
 
-  constructor(params: Record<string, string | boolean> = {}) {
+  constructor(params: Params = {}) {
     super();
 
     // ── CLI Tools ──────────────────────────────────────────────────
@@ -243,4 +244,4 @@ class MacBookPro extends Machine {
   }
 }
 
-export default ({ params = {} }: { params?: Record<string, string | boolean> } = {}) => new MacBookPro(params);
+export default ({ params = {} }: { params?: Params } = {}) => new MacBookPro(params);
