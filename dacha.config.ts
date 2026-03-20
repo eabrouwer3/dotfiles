@@ -11,8 +11,8 @@ import {
   Secret,
   MacDefault,
   GitRepo,
+  type Params,
 } from "@eabrouwer3/dacha";
-import type { Params } from "@eabrouwer3/dacha";
 
 class MacBookPro extends Machine {
   static override params = [
