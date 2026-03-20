@@ -11,7 +11,6 @@ import {
   Secret,
   MacDefault,
   GitRepo,
-  type Params,
 } from "@eabrouwer3/dacha";
 
 class MacBookPro extends Machine {
@@ -19,7 +18,7 @@ class MacBookPro extends Machine {
     { name: "isTaxbitLaptop", message: "Is this a Taxbit laptop?", type: "confirm" as const, default: false },
   ];
 
-  constructor(params: Params = {}) {
+  constructor(params: Record<string, string | boolean> = {}) {
     super();
 
     // ── CLI Tools ──────────────────────────────────────────────────
@@ -244,4 +243,4 @@ class MacBookPro extends Machine {
   }
 }
 
-export default ({ params = {} }: { params?: Params } = {}) => new MacBookPro(params);
+export default ({ params = {} }: { params?: Record<string, string | boolean> } = {}) => new MacBookPro(params);
