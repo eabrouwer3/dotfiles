@@ -232,12 +232,6 @@ class MacBookPro extends Machine {
         '<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>57</integer><integer>8388608</integer></array><key>type</key><string>standard</string></dict></dict>'`,
     });
 
-    // Xcode Command Line Tools
-    new Command(this, "xcode-clt", {
-      run: "xcode-select --install 2>/dev/null || true",
-      check: "xcode-select -p",
-    });
-
     // Set hostname
     new Command(this, "set-hostname", {
       run: `
