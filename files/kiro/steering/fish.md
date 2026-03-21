@@ -227,5 +227,6 @@ end
 6. No `!!` for last command — use `$history[1]` or up arrow
 7. Semicolons separate commands on one line (same as bash)
 8. `test` and `[` work the same as POSIX, but prefer `test` for clarity
-9. No heredocs (`<<EOF`) — use `printf` or `echo` with multiple lines, or a temp file
+9. No heredocs (`<<EOF`) — use `printf` or `echo` with multiple lines, or a temp file. To write multi-line content to a file, use `printf` or write it with a tool (fsWrite), never `cat << 'EOF' > file`
 10. No `function() { }` syntax — always use `function name ... end`
+11. No `cat << 'SCRIPT' > file.ts` — this is a bash heredoc and will fail in fish with "Expected a string, but found a redirection". Use `printf '%s\n' 'line1' 'line2' > file.ts` or write the file using a tool instead
