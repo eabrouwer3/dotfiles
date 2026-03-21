@@ -1,49 +1,70 @@
 # dotfiles
 
-[dacha](https://github.com/eabrouwer3/dacha)-based system configuration for macOS.
+Single-script macOS system configuration powered by [zx](https://google.github.io/zx/). One file (`setup.mjs`) manages everything: brew packages, cask apps, config files, age-encrypted secrets, git repos, directories, shell commands, macOS defaults, and launchd daemons.
 
-One command installs dacha, clones this repo, and applies the full configuration — packages, GUI apps, shell, terminal, window management, macOS defaults, and secrets.
+## Fresh Machine Setup
 
-## Quick Start
+On a brand new Mac with nothing installed:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/eabrouwer3/dacha/main/install.sh | sh -s -- --repo https://github.com/eabrouwer3/dotfiles
+# 1. Install Xcode command line tools (for git)
+xcode-select --install
+
+# 2. Clone this repo
+git clone https://github.com/eabrouwer3/dotfiles ~/source/dotfiles
+cd ~/source/dotfiles
+
+# 3. Install nvm (if not already present)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+
+# 4. Install Node.js and dependencies
+nvm install
+npm install
+
+# 5. Run setup
+npm run setup
 ```
 
-## Manual Setup
+The script will:
+- Install Homebrew and age if missing
+- Ask if this is a Taxbit laptop (answer saved to `~/.config/dotfiles/params.lock.json`)
+- Install all brew packages and cask apps
+- Create directories, clone git repos
+- Copy config files and decrypt secrets
+- Run shell commands (fisher, krew plugins)
+- Set macOS defaults and hostname
+- Install launchd agents for file watching
+
+## Subsequent Runs
 
 ```bash
-# Install dacha
-curl -fsSL https://raw.githubusercontent.com/eabrouwer3/dacha/main/install.sh | sh
-
-# Clone and apply
-dacha init https://github.com/eabrouwer3/dotfiles
+cd ~/source/dotfiles
+npm run setup
 ```
 
-## Rebuild
+The script is idempotent — it checks current state before applying anything, so running it repeatedly is safe.
 
-After editing any config file:
+## Watch & Sync
+
+Two background modes run automatically via launchd after the first setup:
+
+- `watch` — monitors `files/` in the repo and copies changes to the machine
+- `sync` — monitors config files on the machine and auto-commits changes back to the repo
+
+These are installed as launchd agents and start on login. Logs are at `~/Library/Logs/dotfiles-watch.log` and `~/Library/Logs/dotfiles-sync.log`.
+
+To run manually:
 
 ```bash
-dacha apply
+npx zx setup.mjs watch
+npx zx setup.mjs sync
 ```
 
 ## Secrets
 
-Secrets are age-encrypted and stored in `secrets/`. dacha decrypts them using `~/.config/age/identity.txt`.
+Secrets are age-encrypted in `secrets/` and decrypted using `~/.ssh/id_rsa` as the age identity file.
 
-```bash
-# Edit an existing secret
-dacha secret edit secrets/node-auth-token.age
+## Notes
 
-# Encrypt a new secret
-dacha secret encrypt my-secret.txt --recipients ~/.config/age/recipients.txt
-```
-
-## Hammerspoon
-
-Requires Accessibility permissions on first launch — System Settings → Privacy & Security → Accessibility.
-
-## Note
-
-Russian keyboard layout must be added manually via System Settings → Keyboard → Input Sources.
+- Hammerspoon requires Accessibility permissions — System Settings → Privacy & Security → Accessibility
+- Russian keyboard layout must be added manually via System Settings → Keyboard → Input Sources

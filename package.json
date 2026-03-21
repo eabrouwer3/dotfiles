@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "scripts": {
+    "setup": "zx setup.mjs"
+  },
+  "dependencies": {
+    "zx": "^8"
+  }
+}
