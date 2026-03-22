@@ -117,7 +117,7 @@ load_params() {
     IS_TAXBIT=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['params']['isTaxbitLaptop'])" "$PARAMS_FILE" 2>/dev/null || echo "False")
   else
     read -rp "Is this a Taxbit laptop? [y/N] " answer
-    [[ "${answer,,}" == "y" ]] && IS_TAXBIT="True" || IS_TAXBIT="False"
+    [[ "$answer" == "y" || "$answer" == "Y" ]] && IS_TAXBIT="True" || IS_TAXBIT="False"
     mkdir -p "$(dirname "$PARAMS_FILE")"
     cat > "$PARAMS_FILE" <<EOF
 {
