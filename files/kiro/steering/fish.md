@@ -230,3 +230,4 @@ end
 9. No heredocs (`<<EOF`) — use `printf` or `echo` with multiple lines, or a temp file. To write multi-line content to a file, use `printf` or write it with a tool (fsWrite), never `cat << 'EOF' > file`
 10. No `function() { }` syntax — always use `function name ... end`
 11. No `cat << 'SCRIPT' > file.ts` — this is a bash heredoc and will fail in fish with "Expected a string, but found a redirection". Use `printf '%s\n' 'line1' 'line2' > file.ts` or write the file using a tool instead
+12. Shell scripts with `#!/bin/sh` shebang use POSIX sh syntax (not fish). When writing `.sh` files (like install scripts), use POSIX syntax (`VAR=value`, `export`, `$()`, `if/then/fi`, etc.). Fish syntax only applies to interactive fish sessions and `.fish` files.

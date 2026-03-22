@@ -10,19 +10,19 @@ On a brand new Mac with nothing installed:
 # 1. Install Xcode command line tools (for git)
 xcode-select --install
 
-# 2. Clone this repo
+# 2. Install Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# 3. Install mise and Node.js
+brew install mise
+mise install node
+
+# 4. Clone this repo
 git clone https://github.com/eabrouwer3/dotfiles ~/source/dotfiles
 cd ~/source/dotfiles
 
-# 3. Install nvm (if not already present)
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-
-# 4. Install Node.js and dependencies
-nvm install
-npm install
-
 # 5. Run setup
-npm run setup
+npx zx setup.mjs
 ```
 
 The script will:
@@ -39,7 +39,7 @@ The script will:
 
 ```bash
 cd ~/source/dotfiles
-npm run setup
+npx zx setup.mjs
 ```
 
 The script is idempotent — it checks current state before applying anything, so running it repeatedly is safe.

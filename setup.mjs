@@ -568,8 +568,7 @@ async function installLaunchdAgents(repoDir) {
     { label: "dev.dotfiles.sync", subcommand: "sync", log: "dotfiles-sync.log" },
   ];
 
-  const nodePath = process.execPath;
-  const zxPath = path.join(repoDir, "node_modules/.bin/zx");
+  const misePath = resolveHome("~/.local/bin/mise");
   const scriptPath = path.join(repoDir, "setup.mjs");
 
   for (const agent of agents) {
@@ -584,8 +583,11 @@ async function installLaunchdAgents(repoDir) {
   <string>${agent.label}</string>
   <key>ProgramArguments</key>
   <array>
-    <string>${nodePath}</string>
-    <string>${zxPath}</string>
+    <string>${misePath}</string>
+    <string>x</string>
+    <string>--</string>
+    <string>npx</string>
+    <string>zx</string>
     <string>${scriptPath}</string>
     <string>${agent.subcommand}</string>
   </array>
